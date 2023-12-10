@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -19,7 +20,7 @@ class AuthController extends Controller
 
     public function me()
     {
-        return response()->json(auth()->user());
+        return User::make(auth()->user());
     }
 
     protected function respondWithToken($token)
