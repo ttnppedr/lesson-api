@@ -15,4 +15,9 @@ class Lesson extends Model
         'lesson_time',
         'description',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 }
