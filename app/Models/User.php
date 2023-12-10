@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enum\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
+        'type',
         'email',
         'password',
     ];
@@ -40,6 +42,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'password' => 'hashed',
+        'type' => UserType::class,
     ];
 
     public function getJWTIdentifier()
