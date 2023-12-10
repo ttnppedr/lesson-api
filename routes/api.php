@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LessonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,6 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'api'], function ($router) {
     Route::get('me', [AuthController::class, 'me']);
+
+    Route::apiResource('lessons', LessonController::class)->only(['store']);
 });

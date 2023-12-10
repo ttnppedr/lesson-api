@@ -45,6 +45,11 @@ class User extends Authenticatable implements JWTSubject
         'type' => UserType::class,
     ];
 
+    public function isTeacher(): bool
+    {
+        return $this->type === UserType::TEACHER;
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
