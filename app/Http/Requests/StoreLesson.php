@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreLesson extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreLesson extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', Rule::unique('lessons')->where('teacher_id', auth()->user()->id)],
             'lesson_time' => 'required|date_format:H:i:00',
             'description' => 'required|string',
         ];
