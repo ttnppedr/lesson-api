@@ -10,6 +10,11 @@ use Illuminate\Http\Response;
 
 class LessonController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Lesson::class, 'lesson');
+    }
+
     public function store(StoreLesson $request)
     {
         $validated = $request->validated();

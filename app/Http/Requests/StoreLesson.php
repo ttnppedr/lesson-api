@@ -11,7 +11,7 @@ class StoreLesson extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->isTeacher();
+        return true;
     }
 
     /**
