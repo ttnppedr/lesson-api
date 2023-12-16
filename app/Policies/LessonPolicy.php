@@ -45,7 +45,7 @@ class LessonPolicy
      */
     public function delete(User $user, Lesson $lesson): bool
     {
-        //
+        return $user->isTeacher() && $lesson->teacher->is($user);
     }
 
     /**

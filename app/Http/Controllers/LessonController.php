@@ -56,4 +56,11 @@ class LessonController extends Controller
 
         return LessonResource::make($lesson->refresh()->load('teacher'));
     }
+
+    public function destroy(Lesson $lesson)
+    {
+        $lesson->delete();
+
+        return response(Response::HTTP_OK);
+    }
 }
