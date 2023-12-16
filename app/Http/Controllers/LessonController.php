@@ -30,4 +30,20 @@ class LessonController extends Controller
     {
         return LessonResource::make($lesson->load('teacher'));
     }
+
+    public function index()
+    {
+        $perPage = request('per_page', 15);
+
+        $query = Lesson::query();
+
+        $query->when(request('teachers'), fn ($query, $teachers) => $query->whereIn('teacher_id', $teachers));
+        $query->when(request('name'), fn ($query, $name) => $query->where('name', 'LIKE', '%'.$name.'%'));
+
+        $query->with('teacher');
+
+        $lessons = $query->simplePaginate($perPage)->withQueryString();
+
+        return LessonResource::collection($lessons);
+    }
 }
