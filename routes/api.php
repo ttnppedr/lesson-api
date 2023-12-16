@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,6 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('me', [AuthController::class, 'me']);
 
     Route::apiResource('lessons', LessonController::class)->only(['store', 'show', 'index', 'update', 'destroy']);
+
+    Route::apiResource('users', UserController::class)->only(['store']);
 });
