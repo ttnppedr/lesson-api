@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Lesson as LessonResource;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,5 +37,20 @@ class EnrollController extends Controller
         $lesson->students()->detach(auth()->user());
 
         return response(Response::HTTP_OK);
+    }
+
+    public function index()
+    {
+        $this->authorize('viewEnrolls', Lesson::class);
+
+        $perPage = request('per_page', 15);
+
+        $query = auth()->user()->lessons()->with('teacher')->getQuery();
+
+        $query->when(request('name'), fn ($query, $name) => $query->where('name', 'LIKE', '%'.$name.'%'));
+
+        $lessons = $query->simplePaginate($perPage)->withQueryString();
+
+        return LessonResource::collection($lessons);
     }
 }

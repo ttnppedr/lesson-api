@@ -73,4 +73,9 @@ class LessonPolicy
     {
         return $user->isStudent();
     }
+
+    public function viewEnrolls(User $user): bool
+    {
+        return $user->isStudent();
+    }
 }

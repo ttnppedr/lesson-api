@@ -33,4 +33,5 @@ Route::group(['middleware' => 'api'], function ($router) {
 
     Route::post('lessons/{lesson}/enroll', [EnrollController::class, 'store']);
     Route::post('lessons/{lesson}/cancel', [EnrollController::class, 'destroy']);
+    Route::get('enrolls', [EnrollController::class, 'index']);
 });
