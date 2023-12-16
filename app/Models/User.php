@@ -61,9 +61,24 @@ class User extends Authenticatable implements JWTSubject
         return $this->type === UserType::ADMIN;
     }
 
-    public function lessons()
+    public function isStudent(): bool
+    {
+        return $this->type === UserType::STUDENT;
+    }
+
+    public function teachLessons()
     {
         return $this->hasMany(Lesson::class, 'teacher_id');
+    }
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_user', 'user_id', 'lesson_id');
+    }
+
+    public function canEnroll(Lesson $lesson): bool
+    {
+        return !$this->lessons->contains($lesson);
     }
 
     public function getJWTIdentifier()

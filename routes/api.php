@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EnrollController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -29,4 +30,6 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::apiResource('lessons', LessonController::class)->only(['store', 'show', 'index', 'update', 'destroy']);
 
     Route::apiResource('users', UserController::class)->only(['store']);
+
+    Route::post('lessons/{lesson}/enroll', [EnrollController::class, 'store']);
 });

@@ -63,4 +63,9 @@ class LessonPolicy
     {
         //
     }
+
+    public function enroll(User $user, Lesson $lesson): bool
+    {
+        return $user->isStudent();
+    }
 }

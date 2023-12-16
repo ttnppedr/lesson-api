@@ -20,4 +20,10 @@ class Lesson extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'lesson_user', 'lesson_id', 'user_id')
+            ->withTimestamps();
+    }
 }
