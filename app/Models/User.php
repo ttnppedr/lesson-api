@@ -50,6 +50,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->type === UserType::TEACHER;
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->type === UserType::ADMIN;
+    }
+
     public function lessons()
     {
         return $this->hasMany(Lesson::class, 'teacher_id');
