@@ -32,4 +32,5 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::apiResource('users', UserController::class)->only(['store']);
 
     Route::post('lessons/{lesson}/enroll', [EnrollController::class, 'store']);
+    Route::post('lessons/{lesson}/cancel', [EnrollController::class, 'destroy']);
 });

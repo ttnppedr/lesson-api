@@ -22,4 +22,19 @@ class EnrollController extends Controller
 
         return response(Response::HTTP_OK);
     }
+
+    public function destroy(Lesson $lesson)
+    {
+        $this->authorize('cancel', $lesson);
+
+        abort_if(
+            !auth()->user()->canCancel($lesson),
+            Response::HTTP_BAD_REQUEST,
+            'You are already not enrolled in this lesson.'
+        );
+
+        $lesson->students()->detach(auth()->user());
+
+        return response(Response::HTTP_OK);
+    }
 }

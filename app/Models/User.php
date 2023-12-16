@@ -81,6 +81,11 @@ class User extends Authenticatable implements JWTSubject
         return !$this->lessons->contains($lesson);
     }
 
+    public function canCancel(Lesson $lesson): bool
+    {
+        return $this->lessons->contains($lesson);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

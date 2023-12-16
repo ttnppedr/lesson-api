@@ -68,4 +68,9 @@ class LessonPolicy
     {
         return $user->isStudent();
     }
+
+    public function cancel(User $user, Lesson $lesson): bool
+    {
+        return $user->isStudent();
+    }
 }
