@@ -25,5 +25,5 @@ Route::post('login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'api'], function ($router) {
     Route::get('me', [AuthController::class, 'me']);
 
-    Route::apiResource('lessons', LessonController::class)->only(['store', 'show', 'index']);
+    Route::apiResource('lessons', LessonController::class)->only(['store', 'show', 'index', 'update']);
 });

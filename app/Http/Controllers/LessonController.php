@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLesson;
+use App\Http\Requests\UpdateLesson;
 use App\Http\Resources\Lesson as LessonResource;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
@@ -45,5 +46,14 @@ class LessonController extends Controller
         $lessons = $query->simplePaginate($perPage)->withQueryString();
 
         return LessonResource::collection($lessons);
+    }
+
+    public function update(UpdateLesson $request, Lesson $lesson)
+    {
+        $validated = $request->validated();
+
+        $lesson->update($validated);
+
+        return LessonResource::make($lesson->refresh()->load('teacher'));
     }
 }
