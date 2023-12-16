@@ -21,6 +21,7 @@ class Lesson extends JsonResource
             'name' => $this->name,
             'lesson_time' => Carbon::make($this->lesson_time)->format('H:i'),
             'description' => $this->description,
+            'students' => $this->when(!auth()->user()->isStudent(), fn() => User::collection($this->students)),
         ];
     }
 }
